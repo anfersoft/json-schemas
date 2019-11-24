@@ -1,0 +1,55 @@
+{
+    "$schema": "./schema.json",
+    "definitions": {
+        "sectionsList": [
+            {"sectionId": "1",
+                "order": 1,
+                "title": "seccion1",
+                "widgetsList": [
+                    {
+                        "widgetId": "1",
+                        "order": 1,
+                        "title": "Mi primer Widget",
+                        "componentsList": [
+                            {
+                                "componentId": "1",
+                                "order": 1,
+                                "title": "Mi primer componente",
+                                "vueComponent": "ComponenteVue2",
+                                "dataSetRef": "001"
+                                
+                            }
+                        ]
+                    }
+                ]
+            
+            }
+        ]
+    },
+
+    "dataSection": {
+        "entityId": 1123,
+        "reportDate": "2019-10-23",
+        "dataSetsList": [
+            {
+                "dataSetId": "001",
+                "dataSetSchema":"repModel1",
+                "data": {
+                    "propiedad1_1": "pro1",
+                    "propiedad1_2": "pro2"
+                }
+            },
+            {
+                "dataSetId": "002",
+                "dataSetSchema":"repModel2",
+                "data": {
+                    "propiedad2_1": "",
+                    "propiedad2_2": ""
+                }
+            }
+        ]
+    }
+
+
+    
+}

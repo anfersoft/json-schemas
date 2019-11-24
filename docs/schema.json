@@ -1,0 +1,165 @@
+{ "$schema": "http://json-schema.org/schema#",
+    "$id": "http://axesor.es/schemas/EntityReportUnifiedModel.json",
+    "title": "EntityReportUnifiedModel",
+    "description": "Commercial Report for Entities",
+
+    "type": "object",
+    "properties": {
+        "definitions": { "$ref": "#/definitions/reportDefinition" },
+        "dataSection": { "$ref": "#/definitions/reportData" }
+    },
+    "required": ["definitions", "data"],
+
+
+    "definitions": {
+
+        "reportDefinition": {
+            "type": "object",
+            "$id": "#reportDefinition",
+            "properties": {
+                "reportDefinitionId": {"type":"string", "maxLength": 64},
+                "title": {"type":"string"},
+                "sectionsList": {"type":"array", "items": {"$ref": "#/definitions/section" }}
+            }
+        },
+        
+        "section": {
+            "type":"object",
+            "$id": "#section",
+            "properties": {
+                "sectionId": {"type":"string"},
+                "title": {"type":"string"},
+                "order": {"type":"integer"},
+                "sectionLayoutRef": {"type":"string", "enum": ["Simple", "DobleColumna"]},
+                "widgetsList": {"type":"array", "items": {"$ref": "#/definitions/widget" }}
+            }
+        },
+                
+        "widget": {
+            "type":"object",
+            "$id": "#widget",
+            "properties": {
+                "widgetId": {"type":"string", "maxLength": 64},
+                "title": {"type":"string"},
+                "order": {"type":"integer", "minimum": 1, "maximum": 1024},
+                "widgetLayoutRef": {"type":"string", "enum": ["layoutTBD1", "layoutTBD2", "layoutTBD3"]},
+                "componentsList": {"type":"array", "items": {"$ref": "#/definitions/component"}}
+            }
+        },
+
+        "component": {
+            "type":"object",
+            "$id": "#component",
+            "properties": {
+                "componentId": {"type":"string", "maxLength": 64},
+                "title": {"type":"string"},
+                "order": {"type":"integer", "minimum": 1, "maximum": 1024},
+                "vueComponent": {"type":"string", "enum": ["componenteVue1", "ComponenteVue2", "ComponenteVueN"]},
+                "dataSetRef": {"title": "string", "maxLength": 64}
+            }
+        },
+
+
+        "reportData": {
+            "type":"object",
+            "$id": "#reportData",
+            "properties": {
+                "entityId": {"type": "integer", "minimum": 1},
+                "reportDate": {"type":"string", "pattern": "^[0-9]{4}(-)(((0)[0-9])|((1)[0-2]))(-)([0-2][0-9]|(3)[0-1])$"},
+                "dataSetsList": {"type": "array", "items": {"$ref": "#/definitions/dataSet"}}
+            }
+        },
+
+
+        "dataSet": {
+            "type": "object",
+            "$id": "#dataSet",
+            "properties": {
+                "dataSetId": {"type":"string", "maxLength": 64},
+                "dataSetSchema": {"type":"string", "enum": ["repModel1", "repModel2", "repModel3"]}
+            },
+            "allOf": [
+                    {
+                        "if": {
+                            "properties": {
+                                "dataSetSchema": {
+                                    "const": "repModel1"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/repModel1"
+                                }
+                            }
+                        }
+                    },
+                    
+                    {
+                        "if": {
+                            "properties": {
+                                "dataSetSchema": {
+                                    "const": "repModel2"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/repModel2"
+                                }
+                            }
+                        }
+                    },
+
+                    {
+                        "if": {
+                            "properties": {
+                                "dataSetSchema": {
+                                    "const": "repModel3"
+                                }
+                            }
+                        },
+                        "then": {
+                            "properties": {
+                                "data": {
+                                    "$ref": "#/definitions/repModel3"
+                                }
+                            }
+                        }
+                    }
+                ]
+        },
+
+
+        "repModel1": {
+            "type": "object",
+            "$id": "#repModel1",
+            "properties": {
+                "propiedad1_1": {"type":"string"},
+                "propiedad1_2": {"type":"string"}
+            }
+        },
+
+        "repModel2": {
+            "type": "object",
+            "$id": "#repModel2",
+            "properties": {
+                "propiedad2_1": {"type":"string"},
+                "propiedad2_2": {"type":"string"}
+            }
+        },
+
+        "repModel3": {
+            "type": "object",
+            "$id": "#repModel3",
+            "properties": {
+                "propiedad3_1": {"type":"string"},
+                "propiedad3_2": {"type":"string"}
+            }
+        }
+
+      
+    }
+}
