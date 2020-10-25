@@ -43,8 +43,8 @@
                 "dataSetId": "002",
                 "dataSetSchema":"repModel2",
                 "data": {
-                    "propiedad2_1": "",
-                    "propiedad2_2": ""
+                    "propiedad2_1": "pro21",
+                    "propiedad2_2": "pro22"
                 }
             }
         ]
